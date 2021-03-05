@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strings"
 
 	"github.com/anaskhan96/soup"
 )
@@ -72,38 +73,12 @@ func GetFile(url string, path string) error {
 	return err
 }
 
-// // IsValidLink ... Check if is a valid link
-// // 	- link(string)
-// // 	- platform(string)
-// func IsValidLink(link string, platform string) bool {
-// 	res, err := url.Parse(link)
-
-// 	if platform == "scan-op" {
-// 		return err == nil && res.Scheme != "" && res.Host != "" && (res.Hostname() == "www.scan-op.cc" || res.Hostname() == "scan-op.cc")
-// 	} else if platform == "japcan" {
-// 		return err == nil && res.Scheme != "" && res.Host != "" && (res.Hostname() == "www.japscan.se" || res.Hostname() == "japscan.se")
-// 	} else {
-// 		log.Fatal("Invalid platform in IsInvalidScan")
-// 		return false
-// 	}
-// }
-
-// // RemoveInvalidLinks ... Remove invalid links
-// // 	- links([]string)
-// // 	- platform(string)
-// func RemoveInvalidLinks(links []string, platform string) []string {
-// 	for i, elem := range links {
-// 		if IsValidLink(elem, platform) == false {
-// 			links = append(links[:i], links[i+1:]...)
-// 			fmt.Printf("%s is invalid.", elem)
-// 		}
-// 	}
-
-// 	return links
-// }
-
 // CreateFolder ... Create a folder
 // 	- name(string): Folder name
-func CreateFolder(name string) {
-	os.MkdirAll(name, os.ModePerm)
+func CreateFolder(url string) string {
+	split := strings.Split(url, "/")
+	res := split[4] + "/" + split[5]
+	os.MkdirAll(res, os.ModePerm)
+
+	return res
 }
