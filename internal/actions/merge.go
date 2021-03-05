@@ -1,8 +1,7 @@
 package actions
 
 import (
-	"fmt"
-
+	"github.com/thelittlebigbot/ohmyscan/internal/utils"
 	"github.com/urfave/cli/v2"
 )
 
@@ -13,5 +12,10 @@ func Merge(c *cli.Context) {
 	manga := c.String("manga")
 	number := c.String("number")
 
-	fmt.Println("Merge", manga, number)
+	name := "doubt" // DEBUG
+	numb := "1"     // DEBUG
+
+	utils.ConvertToPDF(name, numb)
+
+	utils.Message((manga + number), "debug")
 }
