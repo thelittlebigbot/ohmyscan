@@ -5,13 +5,14 @@ import (
 	"os"
 
 	"github.com/thelittlebigbot/ohmyscan/internal/actions"
+	"github.com/thelittlebigbot/ohmyscan/internal/utils"
 	"github.com/urfave/cli/v2"
 )
 
 func main() {
 	app := &cli.App{
-		Name:  "Oh My Scan",
-		Usage: "Download locally your favorite french scans",
+		Name:  utils.MetadataName,
+		Usage: utils.MetadataUsage,
 	}
 
 	app.Commands = []*cli.Command{
