@@ -1,7 +1,7 @@
 package main
 
-import "fmt"
+import "github.com/thelittlebigbot/ohmyscan/pkg/actions"
 
 func main() {
-	fmt.Println("Oh My Scan")
+	actions.Commands()
 }
