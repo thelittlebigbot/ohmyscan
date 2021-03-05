@@ -20,7 +20,7 @@ One Paragraph of project description goes here.
 
 ### About the project
 
-Oh My Scan is a script developed in Go that allows you to download locally your favorite scans. To carry out this project, I was inspired by the initial [go-scan-op.com-scrapper](https://github.com/SegFault42/go-scan-op.com-scrapper) project of [https://github.com/SegFault42](https://github.com/SegFault42).
+Oh My Scan is a script developed in Go that allows you to download locally your favorite french scans. To carry out this project, I was inspired by the initial [go-scan-op.com-scrapper](https://github.com/SegFault42/go-scan-op.com-scrapper) project of [https://github.com/SegFault42](https://github.com/SegFault42).
 
 ### Status
 
