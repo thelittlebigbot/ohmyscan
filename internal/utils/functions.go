@@ -3,22 +3,45 @@ package utils
 import (
 	"fmt"
 	"io"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
 	"strings"
 
+	"github.com/TwinProduction/go-color"
 	"github.com/anaskhan96/soup"
+	"github.com/jung-kurt/gofpdf"
 )
 
 // TODO: Docstrings for functions and returns
+
+// Message ... Basic message
+// 	- str(string)
+// 	- level(string)
+func Message(str string, level string) {
+	// TODO: Create a level interface/type struct
+
+	if level == "error" {
+		log.Fatal(color.Colorize(ColorRed, str))
+	}
+	if level == "warning" {
+		fmt.Println(color.Colorize(ColorYellow, str))
+	}
+	if level == "success" {
+		fmt.Println(color.Colorize(ColorGreen, str))
+	}
+	if level == "debug" {
+		fmt.Println(color.Colorize(ColorCyan, str))
+	}
+}
 
 // GetContent ... Get content from the html page
 // 	- url(string): Enter the html page url to handle content
 func GetContent(url string) string {
 	res, err := soup.Get(url)
 	if err != nil {
-		log.Fatal(err)
+		Message(err.Error(), "error")
 	}
 
 	return res
@@ -32,10 +55,10 @@ func GetLinks(content string, platform string) []string {
 
 	doc := soup.HTMLParse(content)
 
-	if platform == ScanOPName {
+	if platform == PlatformScanOPName {
 		args := doc.Find("div", "id", "all")
 		if args.Error != nil {
-			log.Fatal(args.Error)
+			Message(args.Error.Error(), "error")
 		}
 
 		img := args.FindAll("img")
@@ -43,10 +66,10 @@ func GetLinks(content string, platform string) []string {
 		for _, elem := range img {
 			res = append(res, elem.Attrs()["data-src"])
 		}
-	} else if platform == JapScanName {
-		fmt.Println("Get links from japscan") // TODO: Create parser for japscan
+	} else if platform == PlatformJapScanName {
+		Message("Get links from japscan", "debug") // TODO: Create parser for japscan
 	} else {
-		log.Fatal("Invalid platform name in GetLinks function") // DEBUG
+		Message(("GetLinks: " + ErrorPlatformInvalid), "error")
 	}
 
 	return res
@@ -80,14 +103,14 @@ func CreateFolder(url string, platform string) string {
 
 	split := strings.Split(url, "/")
 
-	if platform == ScanOPName {
+	if platform == PlatformScanOPName {
 		res = split[4] + "/" + split[5]
 		os.MkdirAll((Folder + res), os.ModePerm)
-		fmt.Printf("The directory %s was created.\n", Folder+res) // TODO: Add color
-	} else if platform == JapScanName {
-		fmt.Println("Create a forlder for japscan") // TODO: Create a folder for japscan
+		Message(("The directory " + res + " was created"), "success")
+	} else if platform == PlatformJapScanName {
+		Message("Create a forlder for japscan", "debug") // TODO: Create folder for japscan
 	} else {
-		log.Fatal("Invalid platform name in CreateFolder function") // DEBUG
+		Message(ErrorPlatformInvalid, "error")
 	}
 
 	return res
@@ -104,7 +127,7 @@ func DownloadFile(url string, platform string, manga string, number string) {
 	content := GetContent(url)
 	imgs := GetLinks(content, platform)
 	if imgs == nil {
-		log.Fatal("No images provided.") // TODO: Add color
+		Message("No images provided.", "error")
 	}
 
 	CreateFolder(url, platform)
@@ -115,9 +138,46 @@ func DownloadFile(url string, platform string, manga string, number string) {
 		path = strings.TrimSpace(path)
 		err := GetFile(strings.TrimSpace(elem), path)
 		if err != nil {
-			log.Fatal(err)
-		} else {
-			fmt.Printf("%s is downloaded.\n", elem) // TODO: Add color
+			Message(err.Error(), "error")
+		}
+
+		Message((elem + "is downloaded."), "success")
+	}
+
+	Message("Download finish.", "success")
+}
+
+// ConvertToPDF ...
+// 	- name(string)
+// 	- number(string)
+func ConvertToPDF(name string, number string) {
+
+	dir := Folder + name + "/" + number + "/"
+
+	files, err := ioutil.ReadDir(dir)
+	if err != nil {
+		Message(err.Error(), "error")
+	}
+
+	for _, f := range files {
+		pdf := gofpdf.New("P", "mm", "A4", "")
+		pdf.AddPage()
+
+		pdf.ImageOptions(
+			(dir + f.Name()),
+			0, 0,
+			0, 0,
+			false,
+			gofpdf.ImageOptions{ImageType: "JPG", ReadDpi: true},
+			0,
+			"",
+		)
+
+		new := f.Name()[:5]
+
+		err := pdf.OutputFileAndClose((dir + new + ".pdf"))
+		if err != nil {
+			Message(err.Error(), "error")
 		}
 	}
 }
