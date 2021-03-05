@@ -14,8 +14,6 @@ import (
 	"github.com/jung-kurt/gofpdf"
 )
 
-// TODO: Docstrings for functions and returns
-
 // Message ... Basic message
 // 	- str(string)
 // 	- level(string)
@@ -147,11 +145,11 @@ func DownloadFile(url string, platform string, manga string, number string) {
 	Message("Download finish.", "success")
 }
 
-// ConvertToPDF ...
+// ConvertToPDF ... Convert files to pdf and remove jpg
 // 	- name(string)
 // 	- number(string)
 func ConvertToPDF(name string, number string) {
-
+	var err error
 	dir := Folder + name + "/" + number + "/"
 
 	files, err := ioutil.ReadDir(dir)
@@ -173,9 +171,16 @@ func ConvertToPDF(name string, number string) {
 			"",
 		)
 
-		new := f.Name()[:5]
+		new := f.Name()[:3]
 
-		err := pdf.OutputFileAndClose((dir + new + ".pdf"))
+		err = pdf.OutputFileAndClose((dir + new + ".pdf"))
+		Message((dir + new + ".pdf was converted."), "success")
+		if err != nil {
+			Message(err.Error(), "error")
+		}
+
+		err = os.Remove((dir + f.Name()))
+		Message((dir + f.Name() + " was deleted."), "success")
 		if err != nil {
 			Message(err.Error(), "error")
 		}
