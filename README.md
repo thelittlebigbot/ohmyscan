@@ -13,6 +13,8 @@ One Paragraph of project description goes here.
     - [Version](#version)
   - [Getting started](#getting-started)
     - [Downloading](#downloading)
+    - [Running](#running)
+      - [Example](#example)
   - [Authors](#authors)
   - [License](#license)
 
@@ -20,7 +22,7 @@ One Paragraph of project description goes here.
 
 ### About the project
 
-Oh My Scan is a script developed in Go that allows you to download locally your favorite scans. To carry out this project, I was inspired by the initial [go-scan-op.com-scrapper](https://github.com/SegFault42/go-scan-op.com-scrapper) project of [https://github.com/SegFault42](https://github.com/SegFault42).
+Oh My Scan is a script developed in Go that allows you to download locally your favorite french scans. To carry out this project, I was inspired by the initial [go-scan-op.com-scrapper](https://github.com/SegFault42/go-scan-op.com-scrapper) project of [https://github.com/SegFault42](https://github.com/SegFault42).
 
 ### Status
 
@@ -36,14 +38,22 @@ Oh My Scan is a script developed in Go that allows you to download locally your 
 
 ## Getting started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
-
 ### Downloading
-
-What things you need to do for downloading the software.
 
 ```sh
 git clone https://github.com/thelittlebigbot/ohmyscan
+```
+
+### Running
+
+```sh
+ohmyscan download --platform PLATFORM_NAME --manga MANGA_NAME --number NUMBER
+```
+
+#### Example
+
+```sh
+ohmyscan download --platform scan-op --manga doubt --number 1
 ```
 
 ## Authors
