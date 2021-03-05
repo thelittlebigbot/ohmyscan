@@ -1,7 +1,5 @@
 package utils
 
-// TODO: Add docstrings
-
 // Folder ...
 const Folder = "downloads/"
 
@@ -34,6 +32,6 @@ const (
 
 // Errors ...
 const (
-	ErrorPlatformInvalid string = "Invalid platform name."                                      // TODO: Add color
-	ErrorArgumentsEmpty  string = "You need to specify the platform, the manga and the number." // TODO: Add color
+	ErrorPlatformInvalid string = "Invalid platform name."
+	ErrorArgumentsEmpty  string = "You need to specify the platform, the manga and the number."
 )
