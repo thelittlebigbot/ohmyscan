@@ -5,8 +5,6 @@ import (
 	"github.com/urfave/cli/v2"
 )
 
-// TODO: Add docstring and create the content of the function
-
 // Merge ...
 func Merge(c *cli.Context) {
 	manga := c.String("manga")
@@ -16,6 +14,7 @@ func Merge(c *cli.Context) {
 	numb := "1"     // DEBUG
 
 	utils.ConvertToPDF(name, numb)
+	// TODO: Merge all pdf files in one file
 
 	utils.Message((manga + number), "debug")
 }
