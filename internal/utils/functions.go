@@ -32,10 +32,10 @@ func GetLinks(content string, platform string) []string {
 
 	doc := soup.HTMLParse(content)
 
-	if platform == "scan-op" {
+	if platform == ScanOPName {
 		args := doc.Find("div", "id", "all")
 		if args.Error != nil {
-			log.Fatal("Unable to parse links")
+			log.Fatal(args.Error)
 		}
 
 		img := args.FindAll("img")
@@ -43,10 +43,10 @@ func GetLinks(content string, platform string) []string {
 		for _, elem := range img {
 			res = append(res, elem.Attrs()["data-src"])
 		}
-	} else if platform == "japsan" {
+	} else if platform == JapScanName {
 		fmt.Println("Get links from japscan") // TODO: Create parser for japscan
 	} else {
-		log.Fatal("Invalid platform in GetLinks")
+		log.Fatal("Invalid platform name in GetLinks function") // DEBUG
 	}
 
 	return res
@@ -75,10 +75,49 @@ func GetFile(url string, path string) error {
 
 // CreateFolder ... Create a folder
 // 	- name(string): Folder name
-func CreateFolder(url string) string {
+func CreateFolder(url string, platform string) string {
+	var res string
+
 	split := strings.Split(url, "/")
-	res := split[4] + "/" + split[5]
-	os.MkdirAll(("downloads/" + res), os.ModePerm)
+
+	if platform == ScanOPName {
+		res = split[4] + "/" + split[5]
+		os.MkdirAll((Folder + res), os.ModePerm)
+		fmt.Printf("The directory %s was created.\n", Folder+res) // TODO: Add color
+	} else if platform == JapScanName {
+		fmt.Println("Create a forlder for japscan") // TODO: Create a folder for japscan
+	} else {
+		log.Fatal("Invalid platform name in CreateFolder function") // DEBUG
+	}
 
 	return res
+}
+
+// DownloadFile ... Download file
+// 	- url(string)
+// 	- platform(string)
+// 	- manga(string)
+// 	- number(uint8)
+func DownloadFile(url string, platform string, manga string, number string) {
+	// TODO: Convent number in uint8
+
+	content := GetContent(url)
+	imgs := GetLinks(content, platform)
+	if imgs == nil {
+		log.Fatal("No images provided.") // TODO: Add color
+	}
+
+	CreateFolder(url, platform)
+
+	for _, elem := range imgs {
+		split := strings.Split(elem, "/")
+		path := Folder + manga + "/" + number + "/" + split[(len(split)-1)]
+		path = strings.TrimSpace(path)
+		err := GetFile(strings.TrimSpace(elem), path)
+		if err != nil {
+			log.Fatal(err)
+		} else {
+			fmt.Printf("%s is downloaded.\n", elem) // TODO: Add color
+		}
+	}
 }
