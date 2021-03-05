@@ -78,7 +78,7 @@ func GetFile(url string, path string) error {
 func CreateFolder(url string) string {
 	split := strings.Split(url, "/")
 	res := split[4] + "/" + split[5]
-	os.MkdirAll(res, os.ModePerm)
+	os.MkdirAll(("downloads/" + res), os.ModePerm)
 
 	return res
 }
