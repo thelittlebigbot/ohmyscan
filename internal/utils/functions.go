@@ -168,7 +168,7 @@ func ConvertToPDF(name string, number string) {
 		pdf.ImageOptions(
 			(dir + f.Name()),
 			0, 0,
-			0, 0,
+			210, 0,
 			false,
 			gofpdf.ImageOptions{ImageType: "JPG", ReadDpi: true},
 			0,
