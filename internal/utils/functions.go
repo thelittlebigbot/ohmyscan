@@ -3,6 +3,7 @@ package utils
 import (
 	"fmt"
 	"io"
+	"io/fs"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -145,6 +146,28 @@ func DownloadFile(url string, platform string, manga string, number string) {
 	Message("Download finish.", "success")
 }
 
+// ListFiles ...
+// 	- dir(string)
+func ListFiles(dir string) []fs.FileInfo {
+	files, err := ioutil.ReadDir(dir)
+	if err != nil {
+		Message(err.Error(), "error")
+	}
+
+	return files
+}
+
+// RemoveFiles ...
+//	- dir(string)
+//	- name(string)
+func RemoveFiles(dir string, name string) {
+	err := os.Remove((dir + name))
+	Message((dir + name + " was deleted."), "success")
+	if err != nil {
+		Message(err.Error(), "error")
+	}
+}
+
 // ConvertToPDF ... Convert files to pdf and remove jpg
 // 	- name(string)
 // 	- number(string)
@@ -152,10 +175,7 @@ func ConvertToPDF(name string, number string) {
 	var err error
 	dir := Folder + name + "/" + number + "/"
 
-	files, err := ioutil.ReadDir(dir)
-	if err != nil {
-		Message(err.Error(), "error")
-	}
+	files := ListFiles(dir)
 
 	for _, f := range files {
 		pdf := gofpdf.New("P", "mm", "A4", "")
@@ -179,10 +199,6 @@ func ConvertToPDF(name string, number string) {
 			Message(err.Error(), "error")
 		}
 
-		err = os.Remove((dir + f.Name()))
-		Message((dir + f.Name() + " was deleted."), "success")
-		if err != nil {
-			Message(err.Error(), "error")
-		}
+		RemoveFiles(dir, f.Name())
 	}
 }
