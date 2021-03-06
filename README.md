@@ -10,13 +10,16 @@ One Paragraph of project description goes here.
                       |__/
 ```
 
+[![Maintenance](https://img.shields.io/badge/maintained-yes-green.svg)](https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity)
+[![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/thelittlebigbot/ohmyscan/blob/master/LICENSE)
+[![Go report card](https://goreportcard.com/badge/github.com/thelittlebigbot/ohmyscan)](https://github.com/thelittlebigbot/ohmyscan)
+
 ## Table of contents
 
 - [Oh My Scan](#oh-my-scan)
   - [Table of contents](#table-of-contents)
   - [Overview](#overview)
     - [About the project](#about-the-project)
-    - [Status](#status)
     - [Buit with](#buit-with)
     - [Version](#version)
   - [Getting started](#getting-started)
@@ -33,17 +36,13 @@ One Paragraph of project description goes here.
 
 Oh My Scan is a script developed in Go that allows you to download locally your favorite french scans. To carry out this project, I was inspired by the initial [go-scan-op.com-scrapper](https://github.com/SegFault42/go-scan-op.com-scrapper) project of [https://github.com/SegFault42](https://github.com/SegFault42).
 
-### Status
-
-**WIP**
-
 ### Buit with
 
 - [Go](https://golang.org/) - The language used.
 
 ### Version
 
-**0.1.0**
+**1.0.0**
 
 ## Getting started
 
