@@ -8,18 +8,19 @@ import (
 // Download ...
 func Download(c *cli.Context) {
 	platform := c.String("platform")
-	manga := c.String("manga")
+	name := c.String("name")
 	number := c.String("number")
 
-	if platform == "" || manga == "" || number == "" {
+	if platform == "" || name == "" || number == "" {
 		utils.Message(utils.ErrorArgumentsEmpty, "error")
-	} else if platform == utils.PlatformScanOPName {
-		platform := utils.PlatformScanOPName
-		url := utils.PlatformScanOPURL + manga + "/" + number
+	}
 
-		utils.DownloadFile(url, platform, manga, number)
+	if platform == utils.PlatformScanOPName {
+		url := utils.PlatformScanOPURL + name + "/" + number
+		utils.DownloadFile(url, utils.PlatformScanOPName, name, number)
+	}
 
-	} else if platform == utils.PlatformJapScanName {
+	if platform == utils.PlatformJapScanName {
 		utils.Message("Comming soon from Japscan.", "debug")
 	}
 }

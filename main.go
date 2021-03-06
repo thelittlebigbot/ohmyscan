@@ -24,7 +24,7 @@ func main() {
 					Name:  "platform",
 					Usage: "Select your platform",
 				}, &cli.StringFlag{
-					Name:  "manga",
+					Name:  "name",
 					Usage: "Select your manga",
 				}, &cli.StringFlag{
 					Name:  "number",
@@ -41,7 +41,7 @@ func main() {
 			Usage: "Merge", // TODO: Add description
 			Flags: []cli.Flag{
 				&cli.StringFlag{
-					Name:  "manga",
+					Name:  "name",
 					Usage: "Select your manga",
 				}, &cli.StringFlag{
 					Name:  "number",
