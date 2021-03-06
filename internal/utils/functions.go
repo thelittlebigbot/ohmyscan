@@ -48,27 +48,20 @@ func GetContent(url string) string {
 
 // GetLinks ... Function that allows you to list all the image links present in an HTML document.
 // 	- content(string): Content of the html page to retrieve image links.
-// 	- platform(string): Name of the desired platform.
-func GetLinks(content string, platform string) []string {
+func GetLinks(content string) []string {
 	var res []string
 
 	doc := soup.HTMLParse(content)
 
-	if platform == PlatformScanOPName {
-		args := doc.Find("div", "id", "all")
-		if args.Error != nil {
-			Message(args.Error.Error(), "error")
-		}
+	args := doc.Find("div", "id", "all")
+	if args.Error != nil {
+		Message(args.Error.Error(), "error")
+	}
 
-		img := args.FindAll("img")
+	img := args.FindAll("img")
 
-		for _, elem := range img {
-			res = append(res, elem.Attrs()["data-src"])
-		}
-	} else if platform == PlatformJapScanName {
-		Message("Get links from japscan", "debug") // TODO: Create parser for japscan
-	} else {
-		Message(("GetLinks: " + ErrorPlatformInvalid), "error")
+	for _, elem := range img {
+		res = append(res, elem.Attrs()["data-src"])
 	}
 
 	return res
@@ -97,39 +90,30 @@ func GetFile(url string, dir string) error {
 
 // CreateFolder ... Function that allows you to create a folder.
 // 	- name(string): Name of the folder to be created.
-func CreateFolder(url string, platform string) string {
-	var res string
-
+func CreateFolder(url string) string {
 	split := strings.Split(url, "/")
 
-	if platform == PlatformScanOPName {
-		res = split[4] + "/" + split[5]
-		os.MkdirAll((Folder + res), os.ModePerm)
-		Message(("The directory " + Folder + res + " was created."), "success")
-	} else if platform == PlatformJapScanName {
-		Message("Create a forlder for japscan", "debug") // TODO: Create folder for japscan
-	} else {
-		Message(ErrorPlatformInvalid, "error")
-	}
+	res := split[4] + "/" + split[5]
+	os.MkdirAll((Folder + res), os.ModePerm)
+	Message(("The directory " + Folder + res + " was created."), "success")
 
 	return res
 }
 
 // DownloadFile ... Function that allows you to download documents online.
 // 	- url(string): URL of the HTML page.
-// 	- platform(string): Name of the desired platform.
 // 	- name(string): Name of the manga to download.
 // 	- number(string): Volume number to download.
-func DownloadFile(url string, platform string, name string, number string) {
+func DownloadFile(url string, name string, number string) {
 	// TODO: Convent number in uint8
 
 	content := GetContent(url)
-	imgs := GetLinks(content, platform)
+	imgs := GetLinks(content)
 	if imgs == nil {
 		Message("No images provided.", "error")
 	}
 
-	CreateFolder(url, platform)
+	CreateFolder(url)
 
 	for _, elem := range imgs {
 		split := strings.Split(elem, "/")
@@ -140,10 +124,10 @@ func DownloadFile(url string, platform string, name string, number string) {
 			Message(err.Error(), "error")
 		}
 
-		Message(("The file" + elem + "is downloaded."), "debug")
+		Message(("The file" + elem + "was downloaded."), "debug")
 	}
 
-	Message(("The directory " + Folder + name + "/" + number + " was downloaded."), "success") // TODO: Better description
+	Message(("The volume " + number + " of " + name + " was downloaded."), "success")
 }
 
 // ListFiles ... Function that allows you to list all the files in a folder.
@@ -199,5 +183,5 @@ func ConvertToPDF(name string, number string) {
 		Message(err.Error(), "error")
 	}
 
-	Message(("The file " + dir + fName + " was converted."), "success")
+	Message(("The volumne " + number + " of " + name + " was converted."), "success")
 }
