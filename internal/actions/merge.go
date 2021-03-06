@@ -12,7 +12,7 @@ func Merge(c *cli.Context) {
 	number := c.String("number")
 
 	if name == "" || number == "" {
-		utils.Message("You need to specify the name and the number.", "error")
+		utils.Message(utils.ErrorArgumentsEmpty, "error")
 	}
 
 	utils.ConvertToPDF(name, number)
