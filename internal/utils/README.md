@@ -3,9 +3,9 @@
 ## Table of contents
 
 - [Utils](#utils)
-  - [Table of contents](#table-of-contents)
-  - [Constants](#constants)
-  - [Functions](#functions)
+	- [Table of contents](#table-of-contents)
+	- [Constants](#constants)
+	- [Functions](#functions)
 
 ## Constants
 
@@ -40,14 +40,12 @@ const (
 )
 ```
 
-List of the names and links of the platforms used in this application.
+List of the name and link of the platform used in this application.
 
 ```go
 const (
-	PlatformScanOPName  string
-	PlatformScanOPURL   string
-	PlatformJapScanName string
-	PlatformJapScanURL  string
+	PlatformName  string
+	PlatformURL   string
 )
 ```
 
@@ -65,7 +63,7 @@ const (
 Function that allows you to create a folder.
 
 ```go
-func CreateFolder(url string, platform string) string
+func CreateFolder(url string) string
 ```
 
 Function that allows you to convert multiple images into a single PDF.
@@ -77,7 +75,7 @@ func ConvertToPdf(name string, number string)
 Function that allows you to download documents online.
 
 ```go
-func DownloadFile(url string, platform string, name string, number string)
+func DownloadFile(url string, name string, number string)
 ```
 
 Function that allows you to retrieve all the content of an HTML page.
@@ -95,7 +93,7 @@ func GetFile(url string, dir string) error
 Function that allows you to list all the image links present in an HTML document.
 
 ```go
-func GetLinks(content string, platform string) []string
+func GetLinks(content string) []string
 ```
 
 Function that allows you to list all the files in a folder.

@@ -21,9 +21,6 @@ func main() {
 			Usage: "Download", // TODO: Add description
 			Flags: []cli.Flag{
 				&cli.StringFlag{
-					Name:  "platform",
-					Usage: "Select your platform",
-				}, &cli.StringFlag{
 					Name:  "name",
 					Usage: "Select your manga",
 				}, &cli.StringFlag{

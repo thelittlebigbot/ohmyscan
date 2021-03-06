@@ -60,14 +60,14 @@ git clone https://github.com/thelittlebigbot/ohmyscan
 To download a scan in multiple images, please run this command:
 
 ```sh
-ohmyscan download --platform PLATFORM_NAME --manga MANGA_NAME --number NUMBER
+ohmyscan download --name MANGA_NAME --number NUMBER
 ```
 
 **Example**:
 
 ```sh
 # https://scan-op.cc/manga/doubt/1
-ohmyscan download --platform scan-op --manga doubt --number 1
+ohmyscan download --name doubt --number 1
 ```
 
 #### Merge a scan
