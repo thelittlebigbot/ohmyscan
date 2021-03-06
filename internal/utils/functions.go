@@ -3,6 +3,7 @@ package utils
 import (
 	"fmt"
 	"io"
+	"io/fs"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -104,7 +105,7 @@ func CreateFolder(url string, platform string) string {
 	if platform == PlatformScanOPName {
 		res = split[4] + "/" + split[5]
 		os.MkdirAll((Folder + res), os.ModePerm)
-		Message(("The directory " + res + " was created"), "success")
+		Message(("The directory " + Folder + res + " was created."), "success")
 	} else if platform == PlatformJapScanName {
 		Message("Create a forlder for japscan", "debug") // TODO: Create folder for japscan
 	} else {
@@ -119,7 +120,7 @@ func CreateFolder(url string, platform string) string {
 // 	- platform(string)
 // 	- manga(string)
 // 	- number(uint8)
-func DownloadFile(url string, platform string, manga string, number string) {
+func DownloadFile(url string, platform string, name string, number string) {
 	// TODO: Convent number in uint8
 
 	content := GetContent(url)
@@ -132,33 +133,52 @@ func DownloadFile(url string, platform string, manga string, number string) {
 
 	for _, elem := range imgs {
 		split := strings.Split(elem, "/")
-		path := Folder + manga + "/" + number + "/" + split[(len(split)-1)]
+		path := Folder + name + "/" + number + "/" + split[(len(split)-1)]
 		path = strings.TrimSpace(path)
 		err := GetFile(strings.TrimSpace(elem), path)
 		if err != nil {
 			Message(err.Error(), "error")
 		}
 
-		Message((elem + "is downloaded."), "success")
+		Message(("The file" + elem + "is downloaded."), "debug")
 	}
 
-	Message("Download finish.", "success")
+	Message(("The directory " + Folder + name + "/" + number + " was downloaded."), "success") // TODO: Better description
+}
+
+// ListFiles ...
+// 	- dir(string)
+func ListFiles(dir string) []fs.FileInfo {
+	files, err := ioutil.ReadDir(dir)
+	if err != nil {
+		Message(err.Error(), "error")
+	}
+
+	return files
+}
+
+// RemoveFiles ...
+//	- dir(string)
+//	- name(string)
+func RemoveFiles(dir string, name string) {
+	err := os.Remove((dir + name))
+	Message(("The file " + dir + name + " was deleted."), "debug")
+	if err != nil {
+		Message(err.Error(), "error")
+	}
 }
 
 // ConvertToPDF ... Convert files to pdf and remove jpg
 // 	- name(string)
 // 	- number(string)
 func ConvertToPDF(name string, number string) {
-	var err error
 	dir := Folder + name + "/" + number + "/"
+	files := ListFiles(dir)
+	fName := name + "-" + number + ".pdf"
 
-	files, err := ioutil.ReadDir(dir)
-	if err != nil {
-		Message(err.Error(), "error")
-	}
+	pdf := gofpdf.New("P", "mm", "A4", "")
 
 	for _, f := range files {
-		pdf := gofpdf.New("P", "mm", "A4", "")
 		pdf.AddPage()
 
 		pdf.ImageOptions(
@@ -171,18 +191,13 @@ func ConvertToPDF(name string, number string) {
 			"",
 		)
 
-		new := f.Name()[:3]
-
-		err = pdf.OutputFileAndClose((dir + new + ".pdf"))
-		Message((dir + new + ".pdf was converted."), "success")
-		if err != nil {
-			Message(err.Error(), "error")
-		}
-
-		err = os.Remove((dir + f.Name()))
-		Message((dir + f.Name() + " was deleted."), "success")
-		if err != nil {
-			Message(err.Error(), "error")
-		}
+		RemoveFiles(dir, f.Name())
 	}
+
+	err := pdf.OutputFileAndClose((dir + fName))
+	if err != nil {
+		Message(err.Error(), "error")
+	}
+
+	Message(("The file " + dir + fName + " was converted."), "success")
 }
