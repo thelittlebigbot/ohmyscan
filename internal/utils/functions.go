@@ -15,9 +15,9 @@ import (
 	"github.com/jung-kurt/gofpdf"
 )
 
-// Message ... Basic message
-// 	- str(string)
-// 	- level(string)
+// Message ... Function that allows you to display many messages, such as errors, etc.
+// 	- str(string): Content of the message.
+// 	- level(string): Alert level of the message.
 func Message(str string, level string) {
 	// TODO: Create a level interface/type struct
 
@@ -35,8 +35,8 @@ func Message(str string, level string) {
 	}
 }
 
-// GetContent ... Get content from the html page
-// 	- url(string): Enter the html page url to handle content
+// GetContent ... Function that allows you to retrieve all the content of an HTML page.
+// 	- url(string): URL of the HTML page.
 func GetContent(url string) string {
 	res, err := soup.Get(url)
 	if err != nil {
@@ -46,9 +46,9 @@ func GetContent(url string) string {
 	return res
 }
 
-// GetLinks ... Get scans links from the content
-// 	- content(string): Enter the content of an html page to handle scan links
-// 	- platform(string): Enter the platform name
+// GetLinks ... Function that allows you to list all the image links present in an HTML document.
+// 	- content(string): Content of the html page to retrieve image links.
+// 	- platform(string): Name of the desired platform.
 func GetLinks(content string, platform string) []string {
 	var res []string
 
@@ -74,17 +74,17 @@ func GetLinks(content string, platform string) []string {
 	return res
 }
 
-// GetFile ... Get file from specifioed links
-// 	- url(string): Specify the url
-// 	- path(string): Specify the path
-func GetFile(url string, path string) error {
+// GetFile ... Function that allows you to recover files from links.
+// 	- url(string): URL of the HTML page.
+// 	- dir(string): Folder where the images will be downloaded.
+func GetFile(url string, dir string) error {
 	res, err := http.Get(url)
 	if err != nil {
 		return err
 	}
 	defer res.Body.Close()
 
-	out, err := os.Create(path)
+	out, err := os.Create(dir)
 	if err != nil {
 		return err
 	}
@@ -95,8 +95,8 @@ func GetFile(url string, path string) error {
 	return err
 }
 
-// CreateFolder ... Create a folder
-// 	- name(string): Folder name
+// CreateFolder ... Function that allows you to create a folder.
+// 	- name(string): Name of the folder to be created.
 func CreateFolder(url string, platform string) string {
 	var res string
 
@@ -115,11 +115,11 @@ func CreateFolder(url string, platform string) string {
 	return res
 }
 
-// DownloadFile ... Download file
-// 	- url(string)
-// 	- platform(string)
-// 	- manga(string)
-// 	- number(uint8)
+// DownloadFile ... Function that allows you to download documents online.
+// 	- url(string): URL of the HTML page.
+// 	- platform(string): Name of the desired platform.
+// 	- name(string): Name of the manga to download.
+// 	- number(string): Volume number to download.
 func DownloadFile(url string, platform string, name string, number string) {
 	// TODO: Convent number in uint8
 
@@ -146,8 +146,8 @@ func DownloadFile(url string, platform string, name string, number string) {
 	Message(("The directory " + Folder + name + "/" + number + " was downloaded."), "success") // TODO: Better description
 }
 
-// ListFiles ...
-// 	- dir(string)
+// ListFiles ... Function that allows you to list all the files in a folder.
+// 	- dir(string): Name of the folder to list.
 func ListFiles(dir string) []fs.FileInfo {
 	files, err := ioutil.ReadDir(dir)
 	if err != nil {
@@ -157,10 +157,10 @@ func ListFiles(dir string) []fs.FileInfo {
 	return files
 }
 
-// RemoveFiles ...
-//	- dir(string)
-//	- name(string)
-func RemoveFiles(dir string, name string) {
+// RemoveFile ... Function that allows you to delete a file.
+//	- dir(string): Name of the folder where the files to be deleted are located.
+//	- name(string): Name of the file to be deleted.
+func RemoveFile(dir string, name string) {
 	err := os.Remove((dir + name))
 	Message(("The file " + dir + name + " was deleted."), "debug")
 	if err != nil {
@@ -168,9 +168,9 @@ func RemoveFiles(dir string, name string) {
 	}
 }
 
-// ConvertToPDF ... Convert files to pdf and remove jpg
-// 	- name(string)
-// 	- number(string)
+// ConvertToPDF ... Function that allows you to convert multiple images into a single PDF.
+// 	- name(string): Name of the manga to convert.
+// 	- number(string): Volume number to convert.
 func ConvertToPDF(name string, number string) {
 	dir := Folder + name + "/" + number + "/"
 	files := ListFiles(dir)
@@ -191,7 +191,7 @@ func ConvertToPDF(name string, number string) {
 			"",
 		)
 
-		RemoveFiles(dir, f.Name())
+		RemoveFile(dir, f.Name())
 	}
 
 	err := pdf.OutputFileAndClose((dir + fName))
