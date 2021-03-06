@@ -7,14 +7,12 @@ import (
 
 // Merge ...
 func Merge(c *cli.Context) {
-	manga := c.String("manga")
+	name := c.String("name")
 	number := c.String("number")
 
-	name := "doubt" // DEBUG
-	numb := "1"     // DEBUG
+	if name == "" || number == "" {
+		utils.Message("You need to specify the name and the number.", "error")
+	}
 
-	utils.ConvertToPDF(name, numb)
-	// TODO: Merge all pdf files in one file
-
-	utils.Message((manga + number), "debug")
+	utils.ConvertToPDF(name, number)
 }
