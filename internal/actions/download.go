@@ -10,6 +10,7 @@ import (
 func Download(c *cli.Context) {
 	name := c.String("name")
 	number := c.String("number")
+	merge := c.Bool("merge")
 
 	if name == "" || number == "" {
 		utils.Message(utils.ErrorArgumentsEmpty, "error")
@@ -17,4 +18,8 @@ func Download(c *cli.Context) {
 
 	url := utils.PlatformURL + name + "/" + number
 	utils.DownloadFile(url, name, number)
+
+	if merge == true {
+		utils.ConvertToPDF(name, number)
+	}
 }

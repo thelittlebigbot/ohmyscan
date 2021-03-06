@@ -18,14 +18,17 @@ func main() {
 	app.Commands = []*cli.Command{
 		{
 			Name:  "download",
-			Usage: "Download", // TODO: Add description
+			Usage: utils.MetadataDownload,
 			Flags: []cli.Flag{
 				&cli.StringFlag{
 					Name:  "name",
-					Usage: "Select your manga",
+					Usage: utils.MetadataFlagsName,
 				}, &cli.StringFlag{
 					Name:  "number",
-					Usage: "Select your manga",
+					Usage: utils.MetadataFlagsNumber,
+				}, &cli.StringFlag{
+					Name:  "merge",
+					Usage: utils.MetadataFlagsMerge,
 				},
 			},
 			Action: func(c *cli.Context) error {
@@ -35,14 +38,14 @@ func main() {
 		},
 		{
 			Name:  "merge",
-			Usage: "Merge", // TODO: Add description
+			Usage: utils.MetadataMerge,
 			Flags: []cli.Flag{
 				&cli.StringFlag{
 					Name:  "name",
-					Usage: "Select your manga",
+					Usage: utils.MetadataFlagsName,
 				}, &cli.StringFlag{
 					Name:  "number",
-					Usage: "Select your manga",
+					Usage: utils.MetadataFlagsNumber,
 				},
 			},
 			Action: func(c *cli.Context) error {

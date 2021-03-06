@@ -18,8 +18,13 @@ const (
 
 // Metadata ... List of metadatas used in the application.
 const (
-	MetadataName  string = "Oh My Scan"
-	MetadataUsage string = "Download locally your favorite french scans."
+	MetadataName        string = "Oh My Scan"
+	MetadataUsage       string = "Download locally your favorite french scans."
+	MetadataDownload    string = "Download your favorite manga from scan-op.cc."
+	MetadataMerge       string = "Merge uploaded images into a single PDF file."
+	MetadataFlagsName   string = "Enter the name of the desired manga."
+	MetadataFlagsNumber string = "Enter the volume number of the desired manga."
+	MetadataFlagsMerge  string = "Merge directly the manga you just downloaded."
 )
 
 // Platforms ... List of the name and link of the platform used in this application.
