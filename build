@@ -1,0 +1,7 @@
+#!/bin/sh
+
+echo "Building for Unix systems..."
+go build
+
+echo "Building for Windows system..."
+GOOS=windows GOARCH=386 go build -o ohmyscan.exe main.go
