@@ -10,7 +10,7 @@ One Paragraph of project description goes here.
                       |__/
 ```
 
-[![Maintenance](https://img.shields.io/badge/maintained-yes-green.svg)](https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity)
+[![Maintenance](https://img.shields.io/badge/maintained-yes-green.svg)](https://github.com/thelittlebigbot/ohmyscan/pulse)
 [![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/thelittlebigbot/ohmyscan/blob/master/LICENSE)
 [![Go report card](https://goreportcard.com/badge/github.com/thelittlebigbot/ohmyscan)](https://github.com/thelittlebigbot/ohmyscan)
 
