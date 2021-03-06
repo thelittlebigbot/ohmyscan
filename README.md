@@ -48,11 +48,11 @@ Oh My Scan is a script developed in Go that allows you to download locally your 
 
 ### Downloading
 
-```sh
-git clone https://github.com/thelittlebigbot/ohmyscan
-```
+To download this application, please go to [releases](https://github.com/thelittlebigbot/ohmyscan/releases/) section and choose the `ohmyscan` file if you're in a Unix system, or `ohmyscan.exe` if your are on a Windows system.
 
 ### How to use
+
+_If you're are on a windows system, add `.exe` after `ohmyscan`._
 
 #### Download a scan
 
