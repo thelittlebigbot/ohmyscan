@@ -46,6 +46,8 @@ Oh My Scan is a script developed in Go that allows you to download locally your 
 
 ## Getting started
 
+**WARNING: If you are on Windows, your antivirus may be panicking. But don't worry, just ignore it. If you have any question about this script, don't hesitate to contact me by email or on Twitter.**
+
 ### Downloading
 
 To download this application, please go to [releases](https://github.com/thelittlebigbot/ohmyscan/releases/) section and choose the `ohmyscan` file if you're in a Unix system, or `ohmyscan.exe` if your are on a Windows system.
