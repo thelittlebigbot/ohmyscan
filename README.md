@@ -71,6 +71,19 @@ ohmyscan download --name MANGA_NAME --number NUMBER
 ohmyscan download --name doubt --number 1
 ```
 
+If you want to merge directly the scans you just downloaded, please run :
+
+```sh
+ohmyscan download --name MANGA_NAME --number NUMBER --merge BOOLEAN
+```
+
+**Example**:
+
+```sh
+# https://scan-op.cc/manga/doubt/1
+ohmyscan download --name doubt --number 1 --merge true
+```
+
 #### Merge a scan
 
 After that, if you want to merge all images of a scan in one PDF file, please do:
