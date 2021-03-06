@@ -22,16 +22,13 @@ const (
 	MetadataUsage string = "Download locally your favorite french scans."
 )
 
-// Platforms ... List of the names and links of the platforms used in this application.
+// Platforms ... List of the name and link of the platform used in this application.
 const (
-	PlatformScanOPName  string = "scan-op"
-	PlatformScanOPURL   string = "https://scan-op.cc/manga/"
-	PlatformJapScanName string = "japscan"
-	PlatformJapScanURL  string = "https://japscan.se/lecture-en-ligne/"
+	PlatformName string = "scan-op"
+	PlatformURL  string = "https://scan-op.cc/manga/"
 )
 
 // Errors ... List of recurring errors used in this application.
 const (
-	ErrorPlatformInvalid string = "Invalid platform name."
-	ErrorArgumentsEmpty  string = "You need to specify the platform, the manga and the number."
+	ErrorArgumentsEmpty string = "You need to specify the the manga's name and the volume's number."
 )
