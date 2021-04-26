@@ -10,9 +10,9 @@ One Paragraph of project description goes here.
                       |__/
 ```
 
-[![Maintenance](https://img.shields.io/badge/maintained-yes-green.svg)](https://github.com/thelittlebigbot/ohmyscan/pulse)
-[![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/thelittlebigbot/ohmyscan/blob/master/LICENSE)
-[![Go report card](https://goreportcard.com/badge/github.com/thelittlebigbot/ohmyscan)](https://github.com/thelittlebigbot/ohmyscan)
+[![Maintenance](https://img.shields.io/badge/maintained-yes-green.svg)](https://github.com/lxndrfgrd/ohmyscan/pulse)
+[![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/lxndrfgrd/ohmyscan/blob/master/LICENSE)
+[![Go report card](https://goreportcard.com/badge/github.com/lxndrfgrd/ohmyscan)](https://github.com/lxndrfgrd/ohmyscan)
 
 ## Table of contents
 
@@ -101,7 +101,7 @@ ohmyscan merge --name doubt --number 1
 
 ## Authors
 
-**Alexandre Figueiredo** - _Initial work_ - [thelittlebigbot](https://github.com/thelittlebigbot).
+**Alexandre Figueiredo** - _Initial work_ - [lxndrfgrd](https://github.com/lxndrfgrd).
 
 ## License
 
