@@ -1,4 +1,4 @@
-module github.com/thelittlebigbot/ohmyscan
+module github.com/afigueir/ohmyscan
 
 go 1.16
 
