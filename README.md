@@ -1,7 +1,5 @@
 # Oh My Scan
 
-One Paragraph of project description goes here.
-
 ```
    ___  _      __  __        ___
   / _ \| |_   |  \/  |_  _  / __| __ __ _ _ _
