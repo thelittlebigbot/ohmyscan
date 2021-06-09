@@ -10,9 +10,9 @@ One Paragraph of project description goes here.
                       |__/
 ```
 
-[![Maintenance](https://img.shields.io/badge/maintained-yes-green.svg)](https://github.com/lxndrfgrd/ohmyscan/pulse)
-[![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/lxndrfgrd/ohmyscan/blob/master/LICENSE)
-[![Go report card](https://goreportcard.com/badge/github.com/lxndrfgrd/ohmyscan)](https://github.com/lxndrfgrd/ohmyscan)
+[![Maintenance](https://img.shields.io/badge/maintained-yes-green.svg)](https://github.com/afigueir/ohmyscan/pulse)
+[![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/afigueir/ohmyscan/blob/master/LICENSE)
+[![Go report card](https://goreportcard.com/badge/github.com/afigueir/ohmyscan)](https://github.com/afigueir/ohmyscan)
 
 ## Table of contents
 
@@ -50,7 +50,7 @@ Oh My Scan is a script developed in Go that allows you to download locally your 
 
 ### Downloading
 
-To download this application, please go to [releases](https://github.com/thelittlebigbot/ohmyscan/releases/) section and choose the `ohmyscan` file if you're in a Unix system, or `ohmyscan.exe` if your are on a Windows system.
+To download this application, please go to [releases](https://github.com/afigueir/ohmyscan/releases/) section and choose the `ohmyscan` file if you're in a Unix system, or `ohmyscan.exe` if your are on a Windows system.
 
 ### How to use
 
@@ -101,7 +101,7 @@ ohmyscan merge --name doubt --number 1
 
 ## Authors
 
-**Alexandre Figueiredo** - _Initial work_ - [lxndrfgrd](https://github.com/lxndrfgrd).
+**Alexandre Figueiredo** - _Initial work_ - [afigueir](https://github.com/afigueir).
 
 ## License
 
