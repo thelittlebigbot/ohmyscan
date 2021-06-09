@@ -1,7 +1,7 @@
 package actions
 
 import (
-	"github.com/thelittlebigbot/ohmyscan/internal/utils"
+	"github.com/afigueir/ohmyscan/internal/utils"
 	"github.com/urfave/cli/v2"
 )
 
