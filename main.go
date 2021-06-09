@@ -4,8 +4,8 @@ import (
 	"log"
 	"os"
 
-	"github.com/thelittlebigbot/ohmyscan/internal/actions"
-	"github.com/thelittlebigbot/ohmyscan/internal/utils"
+	"github.com/afigueir/ohmyscan/internal/actions"
+	"github.com/afigueir/ohmyscan/internal/utils"
 	"github.com/urfave/cli/v2"
 )
 
